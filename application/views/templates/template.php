@@ -8,8 +8,13 @@
     $params['participants'] = '';
   }
 
+  if(!isset($params['activities'])) {
+    $params['activities'] = '';
+  }
+
   $extra_data = array(
-    'participants'      => $params['participants']
+    'participants'      => $params['participants'],
+    'activities'        => $params['activities']
   );
 
   $this->load->view('templates/header', $params['title']);

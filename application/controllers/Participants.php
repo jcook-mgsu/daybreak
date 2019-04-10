@@ -12,22 +12,43 @@ class Participants extends CI_Controller {
 	public function __construct() {
 		parent:: __construct();
 
-		// Load equipment model
+		// Load participant model
 		$this->load->model('Participant_model');
+		// Load activity model
+		$this->load->model('Activity_model');
 	}
 
 	public function index() {
-		$participants = $this->Participant_model->get_participants();
+		if(!$this->ion_auth->logged_in()) {
+			$this->session->set_flashdata("error", "Please login to access application.");
+			redirect("auth/login");
+		} else {
+			$participants = $this->Participant_model->get_participants();
 
-		$data['params'] = array(
-			'view'					=> 'participants/index',
-			'title'					=> 'Participants | Depaul Daybreak',
-			'participants'	=> $participants
-		);
-		$this->load->view('templates/template', $data);
+			$data['params'] = array(
+				'view'					=> 'participants/index',
+				'title'					=> 'Participants | Depaul Daybreak',
+				'participants'	=> $participants
+			);
+			$this->load->view('templates/template', $data);
+		}
 	}
 
-	public function landing() {
+	public function log_activity() {
+		if(!$this->ion_auth->logged_in()) {
+			$this->session->set_flashdata("error", "Please login to access application.");
+			redirect("auth/login");
+		} else {
+			$participants = $this->Participant_model->get_participants();
+			$activities = $this->Activity_model->get_activities();
 
+			$data['params'] = array(
+				'view'					=> 'participants/log-activity',
+				'title'					=> 'Log Activity | Depaul Daybreak',
+				'participants'	=> $participants,
+				'activities'		=> $activities
+			);
+			$this->load->view('templates/template', $data);
+		}
 	}
 }

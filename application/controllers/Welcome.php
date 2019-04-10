@@ -11,11 +11,16 @@ class Welcome extends CI_Controller {
 	// add constructor
 
 	public function index() {
-		$data['params'] = array(
-			'view'		=> 'home',
-			'title'		=> 'Depaul Daybreak'
-		);
-		$this->load->view('templates/template', $data);
+		if(!$this->ion_auth->logged_in()) {
+			$this->session->set_flashdata("error", "Please login to access application.");
+			redirect("auth/login");
+		} else {
+			$data['params'] = array(
+				'view'		=> 'home',
+				'title'		=> 'Depaul Daybreak'
+			);
+			$this->load->view('templates/template', $data);
+		}
 	}
 
 	public function landing() {
@@ -32,18 +37,5 @@ class Welcome extends CI_Controller {
 			$this->session->set_flashdata("error", "Please login to access application.");
 			redirect("welcome/index");
 		}
-	/*	if($_SESSION['logged-in'] == FALSE) {
-			$this->session->set_flashdata("error", "Please login to access application.");
-			redirect("welcome/index");
-		}*/
-
-		// Set the data to be passed to the view
-	/*	$data = array(
-			'view'          => 'landing',
-			'title'         => 'Home'
-		);
-
-		// Load the view
-		$this->load->view('templates/template', $data);*/
 	}
 }
