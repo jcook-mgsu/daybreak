@@ -8,12 +8,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Participants extends CI_Controller {
 
-	// add constructor
+	// Constructor
+	public function __construct() {
+		parent:: __construct();
+
+		// Load equipment model
+		$this->load->model('Participant_model');
+	}
 
 	public function index() {
+		$participants = $this->Participant_model->get_participants();
+
 		$data['params'] = array(
-			'view'		=> 'participants/index',
-			'title'		=> 'Participants | Depaul Daybreak'
+			'view'					=> 'participants/index',
+			'title'					=> 'Participants | Depaul Daybreak',
+			'participants'	=> $participants
 		);
 		$this->load->view('templates/template', $data);
 	}

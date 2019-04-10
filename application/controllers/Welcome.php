@@ -19,18 +19,31 @@ class Welcome extends CI_Controller {
 	}
 
 	public function landing() {
-		if($_SESSION['logged-in'] == FALSE) {
+		if($this->ion_auth->logged_in()) {
+			// Set the data to be passed to the view
+			$data = array(
+				'view'          => 'landing',
+				'title'         => 'Home'
+			);
+
+			// Load the view
+			$this->load->view('templates/template', $data);
+		} else {
 			$this->session->set_flashdata("error", "Please login to access application.");
 			redirect("welcome/index");
 		}
+	/*	if($_SESSION['logged-in'] == FALSE) {
+			$this->session->set_flashdata("error", "Please login to access application.");
+			redirect("welcome/index");
+		}*/
 
 		// Set the data to be passed to the view
-		$data = array(
+	/*	$data = array(
 			'view'          => 'landing',
 			'title'         => 'Home'
 		);
 
 		// Load the view
-		$this->load->view('templates/template', $data);
+		$this->load->view('templates/template', $data);*/
 	}
 }
