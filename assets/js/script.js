@@ -2,6 +2,9 @@ $(document).ready(function(){
     // Initialize Sidenavigation
     $('.sidenav').sidenav();
 
+    // Initialize form selects
+    $('select').formSelect();
+
     // Initialize modals
     $('.modal').modal();
 

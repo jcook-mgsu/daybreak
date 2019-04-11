@@ -8,6 +8,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         parent:: __construct();
       }
 
+      // Add an activity
+
+      // Edit an activity
+
       // Get all activities
       public function get_activities() {
         $this->db->select('*');
@@ -29,5 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         return $activities;
       }
+
+      // Log an activity to a participant
 
     }
