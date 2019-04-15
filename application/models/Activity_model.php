@@ -24,7 +24,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $activities[] = array(
               'id'                    => $row['id'],
               'name'                  => $row['name']
-
             );
           }
         } else {
@@ -35,5 +34,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       }
 
       // Log an activity to a participant
+      public function log_activity($data) {
+        // Prep the data for insertion
+        $data_prepped = array(
+          'participant_id'            => $data['participant_id'],
+          'activity_type_id'          => $data['activity_type'],
+          'activity_start_datetime'   => $data['activity_date'],
+					'activity_end_datetime'     => $data['activity_end_date']
+        );
 
+        $this->db->insert('activity_log', $data_prepped);
+      }
     }

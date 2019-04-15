@@ -12,19 +12,31 @@
 <div class="row">
   <div class="col xl12">
     <?php echo form_open('participants/log_activity'); ?>
-    <div class=" input-field col xl6">
-      <?php // Comp Date Input
+    <div class=" input-field col xl4">
+      <?php // Start Date Input
         $params = array(
           'id'            => 'activity_date',
           'class'         => 'validate',
           'name'          => 'activity_date',
-          'placeholder'   => 'Activity Date',
+          'placeholder'   => 'Activity Start Date',
           'type'          => 'datetime-local'
         );
       ?>
       <?php echo form_input($params); ?>
     </div>
-    <div class="input-field col xl6">
+    <div class=" input-field col xl4">
+      <?php // End Date Input
+        $params = array(
+          'id'            => 'activity_end_date',
+          'class'         => 'validate',
+          'name'          => 'activity_end_date',
+          'placeholder'   => 'Activity End Date',
+          'type'          => 'datetime-local'
+        );
+      ?>
+      <?php echo form_input($params); ?>
+    </div>
+    <div class="input-field col xl4">
       <?php // Activity Type
         $options = array();
         foreach($activities as $activity) {
@@ -40,6 +52,9 @@
         );
       ?>
       <?php echo form_dropdown($params); ?>
+      <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+      <input type="hidden" name="fname" value="<?php echo $_GET['fname']; ?>">
+      <input type="hidden" name="lname" value="<?php echo $_GET['lname']; ?>">
     </div>
     <div class="col xl12">
       <?php // Submit input params

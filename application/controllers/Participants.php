@@ -18,6 +18,7 @@ class Participants extends CI_Controller {
 		$this->load->model('Activity_model');
 	}
 
+	// Main participants list page
 	public function index() {
 		if(!$this->ion_auth->logged_in()) {
 			$this->session->set_flashdata("error", "Please login to access application.");
@@ -34,11 +35,27 @@ class Participants extends CI_Controller {
 		}
 	}
 
+	// Log an activity page
 	public function log_activity() {
 		if(!$this->ion_auth->logged_in()) {
 			$this->session->set_flashdata("error", "Please login to access application.");
 			redirect("auth/login");
 		} else {
+			// If log-activity has been submitted
+			if(isset($_POST['log-activity'])) {
+				// Create array of data to pass to model
+				$form_data = array(
+					'activity_date'			=> $_POST['activity_date'],
+					'activity_end_date'	=> $_POST['activity_end_date'],
+					'activity_type'			=> $_POST['activity_type'],
+					'participant_id'		=> $_POST['id']
+				);
+
+				$this->Activity_model->log_activity($form_data);
+				$this->session->set_flashdata("success", "Activity has been logged.");
+				redirect('participants/log_activity?id='.$_POST['id'].'&fname='.$_POST['fname'].'&lname='.$_POST['lname']);
+			}
+
 			$participants = $this->Participant_model->get_participants();
 			$activities = $this->Activity_model->get_activities();
 
@@ -50,5 +67,10 @@ class Participants extends CI_Controller {
 			);
 			$this->load->view('templates/template', $data);
 		}
+	}
+
+	// View all activities log
+	public function activity_log() {
+		
 	}
 }
