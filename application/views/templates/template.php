@@ -12,9 +12,14 @@
     $params['activities'] = '';
   }
 
+  if(!isset($params['log_records'])) {
+    $params['log_records'] = '';
+  }
+
   $extra_data = array(
     'participants'      => $params['participants'],
-    'activities'        => $params['activities']
+    'activities'        => $params['activities'],
+    'log_records'       => $params['log_records']
   );
 
   $this->load->view('templates/header', $params['title']);

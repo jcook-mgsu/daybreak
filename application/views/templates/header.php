@@ -20,7 +20,7 @@
             <?php if($this->ion_auth->logged_in()) : ?>
               <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="<?php echo base_url(); ?>participants/activity-log">Activity Log</a></li>
+                <li><a href="<?php echo base_url(); ?>participants/activity_log">Activity Log</a></li>
                 <li><a href="<?php echo base_url(); ?>participants/index">Participants</a></li>
                 <li><a href="<?php echo base_url(); ?>auth/logout" class="waves-effect waves-light btn">Logout</a></li>
               </ul>
@@ -30,7 +30,7 @@
       </nav>
       <?php if($this->ion_auth->logged_in()) : ?>
         <ul class="sidenav" id="mobile-demo">
-          <li><a href="<?php echo base_url(); ?>participants/activity-log">Activity Log</a></li>
+          <li><a href="<?php echo base_url(); ?>participants/activity_log">Activity Log</a></li>
           <li><a href="<?php echo base_url(); ?>participants/index">Participants</a></li>
           <li><a href="<?php echo base_url(); ?>auth/logout" class="waves-effect waves-light btn">Logout</a></li>
         </ul>

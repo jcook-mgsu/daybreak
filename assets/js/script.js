@@ -10,4 +10,7 @@ $(document).ready(function(){
 
     // Turn Participants table into data table
     $('#all-participants-table').DataTable();
+
+    // Turn Activity Log table into a data table
+    $('#all-activities-table').DataTable();
   });

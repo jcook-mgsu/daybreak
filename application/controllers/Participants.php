@@ -71,6 +71,18 @@ class Participants extends CI_Controller {
 
 	// View all activities log
 	public function activity_log() {
-		
+		if(!$this->ion_auth->logged_in()) {
+			$this->session->set_flashdata("error", "Please login to access application.");
+			redirect("auth/login");
+		} else {
+			$log_records = $this->Participant_model->get_all_activity_log();
+
+			$data['params'] = array(
+				'view'					=> 'activity-log',
+				'title'					=> 'Activity Log | Depaul Daybreak',
+				'log_records'		=> $log_records
+			);
+			$this->load->view('templates/template', $data);
+		}
 	}
 }
