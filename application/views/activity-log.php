@@ -17,8 +17,12 @@
 
       $this->table->set_heading(array('Participant Name', 'Activity', 'Start Date & Time', 'End Date & Time'));
 
-      foreach($log_records as $column) {
-        $this->table->add_row(array($column['participant'], $column['activity_type'], $column['activity_start_datetime'], $column['activity_end_datetime']));
+      if($log_records != '') {
+        foreach($log_records as $column) {
+          $this->table->add_row(array($column['participant'], $column['activity_type'], $column['activity_start_datetime'], $column['activity_end_datetime']));
+        }
+      } else {
+        $this->table->add_row(array('', '', '', ''));
       }
 
       echo $this->table->generate();
