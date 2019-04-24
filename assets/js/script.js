@@ -8,9 +8,56 @@ $(document).ready(function(){
     // Initialize modals
     $('.modal').modal();
 
-    // Turn Participants table into data table
-    $('#all-participants-table').DataTable();
+    // Turn activities table into data table with filters & export options
+    $('#all-participants-table thead tr').clone(true).appendTo('#all-participants-table thead');
+    $('#all-participants-table thead tr:eq(1) th').each(function(i) {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search '+title+'" />');
 
-    // Turn Activity Log table into a data table
-    $('#all-activities-table').DataTable();
+        $('input', this).on( 'keyup change', function() {
+            if (ptable.column(i).search() !== this.value) {
+                ptable
+                    .column(i)
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    });
+
+    // Init participants datatable
+    var ptable = $('#all-participants-table').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ],
+      orderCellsTop: true,
+      fixedHeader: true
+    });
+
+    // Turn activities table into data table with filters & export options
+    $('#all-activities-table thead tr').clone(true).appendTo('#all-activities-table thead');
+    $('#all-activities-table thead tr:eq(1) th').each(function(i) {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search '+title+'" />');
+
+        $('input', this).on( 'keyup change', function() {
+            if (atable.column(i).search() !== this.value) {
+                atable
+                    .column(i)
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    });
+
+    // Init activities datatable
+    var atable = $('#all-activities-table').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ],
+      orderCellsTop: true,
+      fixedHeader: true
+    });
+
   });
